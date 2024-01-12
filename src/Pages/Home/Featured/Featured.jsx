@@ -1,3 +1,4 @@
+import moment from "moment";
 import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
 import featuredImg from '../../../assets/home/featured.jpg'
 import './Featured.css'
@@ -15,7 +16,7 @@ const Featured = () => {
         <img src={featuredImg} alt="" />
       </div>
       <div className="md:ml-10">
-        <p>March 20, 2023</p>
+        <p> {moment().format('MMM D, YYYY ')}</p>
         <p>WHERE CAN I GET SOME?</p>
         <p className="mb-4">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Error voluptate facere, deserunt dolores maiores quod nobis quas quasi. Eaque repellat recusandae ad laudantium tempore consequatur consequuntur omnis ullam maxime tenetur.
