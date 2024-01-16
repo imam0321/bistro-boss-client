@@ -2,5 +2,4 @@
 
 Restaurant Management WebSide
 
-Currently, two official plugins are available:
 
