@@ -1,11 +1,15 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import {
   loadCaptchaEnginge,
   LoadCanvasTemplate,
   validateCaptcha,
 } from "react-simple-captcha";
+import { AuthContext } from "../../providers/AuthProvider";
+import { Link } from "react-router-dom";
+import { FaFacebookF, FaGithub, FaGoogle } from "react-icons/fa6";
 
 const Login = () => {
+  const { signIn } = useContext(AuthContext);
   const captchaRef = useRef(null);
   const [disabled, setDisabled] = useState(true);
   useEffect(() => {
@@ -18,6 +22,11 @@ const Login = () => {
     const email = form.email.value;
     const password = form.password.value;
     console.log(email, password);
+
+    signIn(email, password).then((result) => {
+      const user = result.user;
+      console.log(user);
+    });
   };
 
   const handleValidateCaptcha = () => {
@@ -78,18 +87,13 @@ const Login = () => {
                 className="input input-bordered"
                 required
               />
-              <label className="label">
+              <label className="label -mb-5">
                 <input
                   onClick={handleValidateCaptcha}
                   type="checkbox"
                   className="checkbox checkbox-sm"
                 />
                 <p className="ms-1">Validate</p>
-              </label>
-              <label className="label">
-                <a href="#" className="label-text-alt link link-hover">
-                  Forgot password?
-                </a>
               </label>
             </div>
             <div className="form-control mt-6">
@@ -99,6 +103,25 @@ const Login = () => {
                 type="submit"
                 value="Login"
               />
+            </div>
+            <label className="label mx-auto">
+              <Link to="/signUp" className="label-text-alt link link-hover">
+                New here? Create a New Account
+              </Link>
+            </label>
+            <div className="mx-auto">
+              <p>Or sign in with</p>
+              <div className="space-x-2 mt-2 mx-auto">
+                <button className="btn btn-outline btn-circle btn-sm">
+                  <FaFacebookF />
+                </button>
+                <button className="btn btn-outline btn-circle btn-sm">
+                  <FaGoogle />
+                </button>
+                <button className="btn btn-outline btn-circle btn-sm">
+                  <FaGithub />
+                </button>
+              </div>
             </div>
           </form>
         </div>
