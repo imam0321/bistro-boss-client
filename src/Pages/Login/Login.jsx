@@ -1,19 +1,22 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
   loadCaptchaEnginge,
   LoadCanvasTemplate,
   validateCaptcha,
 } from "react-simple-captcha";
 import { AuthContext } from "../../providers/AuthProvider";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaFacebookF, FaGithub, FaGoogle } from "react-icons/fa6";
 import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
 
 const Login = () => {
   const { signIn } = useContext(AuthContext);
-  const captchaRef = useRef(null);
   const [disabled, setDisabled] = useState(true);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || '/';
+
   useEffect(() => {
     loadCaptchaEnginge(6);
   }, []);
@@ -45,11 +48,12 @@ const Login = () => {
           `
         }
       });
+      navigate(from, {replace: true})
     });
   };
 
-  const handleValidateCaptcha = () => {
-    const user_captcha_value = captchaRef.current.value;
+  const handleValidateCaptcha = (e) => {
+    const user_captcha_value = e.target.value;
     if (validateCaptcha(user_captcha_value)) {
       setDisabled(false);
     } else {
@@ -104,20 +108,12 @@ const Login = () => {
                 </label>
                 <input
                   type="text"
-                  ref={captchaRef}
+                  onBlur={handleValidateCaptcha}
                   name="captcha"
                   placeholder="Type the captcha above"
                   className="input input-bordered"
                   required
                 />
-                <label className="label -mb-5">
-                  <input
-                    onClick={handleValidateCaptcha}
-                    type="checkbox"
-                    className="checkbox checkbox-sm"
-                  />
-                  <p className="ms-1">Validate</p>
-                </label>
               </div>
               <div className="form-control mt-6">
                 <input

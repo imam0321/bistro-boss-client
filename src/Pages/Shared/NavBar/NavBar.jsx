@@ -66,7 +66,7 @@ const NavBar = () => {
           <ul className="menu menu-horizontal px-1">{navOptions}</ul>
         </div>
         <div className="navbar-end">
-          <button onClick={handleLogOut} className="btn">LogOut</button>
+          <button className="btn">Get Started</button>
         </div>
       </div>
     </>
