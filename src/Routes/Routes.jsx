@@ -24,13 +24,13 @@ export const router = createBrowserRouter([
         element: <Order></Order>,
       },
       {
-        path: '/login',
-        element: <Login></Login>
+        path: "/login",
+        element: <Login></Login>,
       },
       {
-        path: '/signUp',
-        element: <SignUp></SignUp>
-      }
+        path: "/signUp",
+        element: <SignUp></SignUp>,
+      },
     ],
   },
 ]);

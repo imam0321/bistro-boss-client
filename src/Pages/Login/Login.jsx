@@ -15,7 +15,7 @@ const Login = () => {
   const [disabled, setDisabled] = useState(true);
   const navigate = useNavigate();
   const location = useLocation();
-  const from = location.state?.from?.pathname || '/';
+  const from = location.state?.from?.pathname || "/";
 
   useEffect(() => {
     loadCaptchaEnginge(6);
@@ -26,11 +26,8 @@ const Login = () => {
     const form = event.target;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(email, password);
 
-    signIn(email, password).then((result) => {
-      const user = result.user;
-      console.log(user);
+    signIn(email, password).then(() => {
       Swal.fire({
         title: "User Login Successful.",
         showClass: {
@@ -38,17 +35,17 @@ const Login = () => {
             animate__animated
             animate__fadeInUp
             animate__faster
-          `
+          `,
         },
         hideClass: {
           popup: `
             animate__animated
             animate__fadeOutDown
             animate__faster
-          `
-        }
+          `,
+        },
       });
-      navigate(from, {replace: true})
+      navigate(from, { replace: true });
     });
   };
 
@@ -118,7 +115,7 @@ const Login = () => {
               <div className="form-control mt-6">
                 <input
                   className="btn btn-primary"
-                  disabled={disabled}
+                  disabled={false}
                   type="submit"
                   value="Login"
                 />

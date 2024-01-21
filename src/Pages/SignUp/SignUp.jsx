@@ -1,20 +1,32 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaGoogle, FaFacebookF, FaGithub } from "react-icons/fa6";
 import { useForm } from "react-hook-form";
 import { Helmet } from "react-helmet-async";
 import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
+import Swal from "sweetalert2";
 
 const SignUp = () => {
-  const { register, handleSubmit, formState: { errors }, } = useForm();
-  const { createUser } = useContext(AuthContext);
+  const { register, handleSubmit, formState: { errors }, reset} = useForm();
+  const { createUser, updateUserProfile } = useContext(AuthContext);
+  const navigate = useNavigate();
   
   const onSubmit = (data) => {
-    console.log(data)
     createUser(data.email, data.password)
-    .then(result => {
-      const loggedUser = result.user;
-      console.log(loggedUser);
+    .then(() => {
+      updateUserProfile(data.name, data.photoURL)
+      .then(()=> {
+        reset();
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Sign Up successful",
+          showConfirmButton: false,
+          timer: 1500
+        });
+        navigate('/');
+      })
+      .catch(error => console.log(error))
     })
   };
 
@@ -48,6 +60,20 @@ const SignUp = () => {
                 />
                 {errors.name && (
                   <span className="text-red-500 ms-2">Name is required</span>
+                )}
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Photo URL</span>
+                </label>
+                <input
+                  type="text"
+                  {...register("PhotoURL", { required: true })}
+                  placeholder="Photo URL"
+                  className="input input-bordered"
+                />
+                {errors.photoURL && (
+                  <span className="text-red-500 ms-2">Photo URL is required</span>
                 )}
               </div>
               <div className="form-control">
