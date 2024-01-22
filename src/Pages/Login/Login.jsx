@@ -6,9 +6,10 @@ import {
 } from "react-simple-captcha";
 import { AuthContext } from "../../providers/AuthProvider";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { FaFacebookF, FaGithub, FaGoogle } from "react-icons/fa6";
+
 import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
+import SocialLogin from "../Shared/SocialLogin/SocialLogin";
 
 const Login = () => {
   const { signIn } = useContext(AuthContext);
@@ -127,20 +128,7 @@ const Login = () => {
                   New here? Create a New Account
                 </Link>
               </label>
-              <div className="mx-auto">
-                <p>Or sign in with</p>
-                <div className="space-x-2 mt-2 mx-auto">
-                  <button className="btn btn-outline btn-circle btn-sm">
-                    <FaFacebookF />
-                  </button>
-                  <button className="btn btn-outline btn-circle btn-sm">
-                    <FaGoogle />
-                  </button>
-                  <button className="btn btn-outline btn-circle btn-sm">
-                    <FaGithub />
-                  </button>
-                </div>
-              </div>
+              <SocialLogin></SocialLogin>
             </form>
           </div>
         </div>
