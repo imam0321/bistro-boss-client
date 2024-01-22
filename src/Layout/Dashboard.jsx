@@ -8,8 +8,10 @@ import {
   FaBagShopping,
   FaEnvelope,
 } from "react-icons/fa6";
+import useCart from "../Hooks/useCart";
 
 const Dashboard = () => {
+  const [cart] = useCart();
   return (
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -28,7 +30,6 @@ const Dashboard = () => {
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
-
         <ul className="menu p-4 w-80 bg-[#D1A054]">
           <h1 className="text-3xl font-semibold">BISTRO BOSS</h1>
           <h5 className="text-sm font-semibold">Restaurant</h5>
@@ -50,6 +51,7 @@ const Dashboard = () => {
           <li>
             <NavLink to="/dashboard/myCart">
               <FaCartShopping /> My Cart
+              <div className="badge badge-neutral">+{cart?.length || 0}</div>
             </NavLink>
           </li>
 

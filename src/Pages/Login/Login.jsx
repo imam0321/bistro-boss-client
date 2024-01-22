@@ -27,7 +27,8 @@ const Login = () => {
     const email = form.email.value;
     const password = form.password.value;
 
-    signIn(email, password).then(() => {
+    signIn(email, password)
+    .then(() => {
       Swal.fire({
         title: "User Login Successful.",
         showClass: {
@@ -46,7 +47,8 @@ const Login = () => {
         },
       });
       navigate(from, { replace: true });
-    });
+    })
+    .catch(error => console.error(error))
   };
 
   const handleValidateCaptcha = (e) => {

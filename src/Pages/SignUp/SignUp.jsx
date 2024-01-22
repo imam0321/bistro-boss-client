@@ -7,27 +7,44 @@ import { AuthContext } from "../../providers/AuthProvider";
 import Swal from "sweetalert2";
 
 const SignUp = () => {
-  const { register, handleSubmit, formState: { errors }, reset} = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm();
   const { createUser, updateUserProfile } = useContext(AuthContext);
   const navigate = useNavigate();
-  
+
   const onSubmit = (data) => {
-    createUser(data.email, data.password)
-    .then(() => {
+    createUser(data.email, data.password).then(() => {
       updateUserProfile(data.name, data.photoURL)
-      .then(()=> {
-        reset();
-        Swal.fire({
-          position: "top-end",
-          icon: "success",
-          title: "Sign Up successful",
-          showConfirmButton: false,
-          timer: 1500
-        });
-        navigate('/');
-      })
-      .catch(error => console.log(error))
-    })
+        .then(() => {
+          const saveUser = {name: data.name, email: data.email}
+          fetch("http://localhost:5000/users",{
+            method: 'POST',
+            headers: {
+              'content-type': 'application/json'
+            },
+            body: JSON.stringify(saveUser)
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              if (data.insertedId) {
+                reset();
+                Swal.fire({
+                  position: "top-end",
+                  icon: "success",
+                  title: "Sign Up successful",
+                  showConfirmButton: false,
+                  timer: 1500,
+                });
+                navigate("/");
+              }
+            });
+        })
+        .catch((error) => console.log(error));
+    });
   };
 
   return (
@@ -73,7 +90,9 @@ const SignUp = () => {
                   className="input input-bordered"
                 />
                 {errors.photoURL && (
-                  <span className="text-red-500 ms-2">Photo URL is required</span>
+                  <span className="text-red-500 ms-2">
+                    Photo URL is required
+                  </span>
                 )}
               </div>
               <div className="form-control">
@@ -101,8 +120,7 @@ const SignUp = () => {
                     required: true,
                     minLength: 6,
                     maxLength: 20,
-                    pattern:
-                      /(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])/,
+                    pattern: /(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])/,
                   })}
                   name="password"
                   placeholder="password"
