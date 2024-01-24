@@ -12,11 +12,12 @@ import {
   FaBarsStaggered,
 } from "react-icons/fa6";
 import useCart from "../Hooks/useCart";
+import useAdmin from "../Hooks/useAdmin";
 
 const Dashboard = () => {
   const [cart] = useCart();
   // TODO: load da from the server dynamic isAdmin on data
-  const isAdmin = true;
+  const isAdmin = useAdmin();
   return (
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -67,7 +68,7 @@ const Dashboard = () => {
               </li>
               
             </>
-          ) : (
+          ) : 
             <>
               <li>
                 <NavLink to="/">
@@ -93,7 +94,7 @@ const Dashboard = () => {
                 </NavLink>
               </li>
             </>
-          )}
+          }
 
           <div className="divider"></div>
 
