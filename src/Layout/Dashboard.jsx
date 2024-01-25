@@ -17,7 +17,7 @@ import useAdmin from "../Hooks/useAdmin";
 const Dashboard = () => {
   const [cart] = useCart();
   // TODO: load da from the server dynamic isAdmin on data
-  const isAdmin = useAdmin();
+  const [isAdmin] = useAdmin();
   return (
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -39,7 +39,7 @@ const Dashboard = () => {
         <ul className="menu p-4 w-80 bg-[#D1A054]">
           <h1 className="text-3xl font-semibold">BISTRO BOSS</h1>
           <h5 className="text-sm font-semibold">Restaurant</h5>
-          {isAdmin ? (
+          {isAdmin ? 
             <>
               <li>
                 <NavLink to="/">
@@ -68,7 +68,7 @@ const Dashboard = () => {
               </li>
               
             </>
-          ) : 
+           : 
             <>
               <li>
                 <NavLink to="/">
