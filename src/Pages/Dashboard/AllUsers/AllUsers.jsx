@@ -36,7 +36,7 @@ const AllUsers = () => {
   }
 
   const handleDelete = (user) => {
-    
+    // TODO: delete users 
   }
   return (
     <div>
