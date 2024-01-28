@@ -1,6 +1,7 @@
 import { FaFacebookF, FaGithub, FaGoogle } from "react-icons/fa6";
 import { useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../../Hooks/useAuth";
+import Swal from "sweetalert2";
 
 const SocialLogin = () => {
   const {googleSignIn} = useAuth();
@@ -22,7 +23,23 @@ const SocialLogin = () => {
           })
             .then((res) => res.json())
             .then(() => {
-              
+              Swal.fire({
+                title: "User Login Successful.",
+                showClass: {
+                  popup: `
+                    animate__animated
+                    animate__fadeInUp
+                    animate__faster
+                  `,
+                },
+                hideClass: {
+                  popup: `
+                    animate__animated
+                    animate__fadeOutDown
+                    animate__faster
+                  `,
+                },
+              });
               navigate(from, { replace: true });
             });
     })

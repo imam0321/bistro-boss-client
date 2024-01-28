@@ -1,20 +1,47 @@
 import { FaPenToSquare, FaTrashCan } from "react-icons/fa6";
 import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
 import useMenu from "../../../Hooks/useMenu";
-
+import Swal from "sweetalert2";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
 const ManageItems = () => {
-  const [menu] = useMenu();
+  const [menu, , refetch] = useMenu();
+  const [axiosSecure] = useAxiosSecure();
 
   const handleUpdate = (item) => {
-    // TODO: Update Items 
-  }
+    // TODO: Update Items
+  };
   const handleDelete = (item) => {
-    // TODO: delete Items 
-  }
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.delete(`/menu/${item._id}`)
+        .then((res) => {
+          if (res.data.deletedCount > 0) {
+            refetch();
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your file has been deleted.",
+              icon: "success",
+            });
+          }
+        });
+      }
+    });
+  };
   return (
     <div>
-      <SectionTitle heading='Manage All Items' subHeading='Hurry up'></SectionTitle>
+      <SectionTitle
+        heading="Manage All Items"
+        subHeading="Hurry up"
+      ></SectionTitle>
       <div className="uppercase flex justify-between items-center mb-5">
         <h1 className="text-2xl">Total item: {menu.length}</h1>
       </div>

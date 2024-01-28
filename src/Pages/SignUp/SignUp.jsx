@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
@@ -14,7 +14,10 @@ const SignUp = () => {
     reset,
   } = useForm();
   const { createUser, updateUserProfile } = useAuth();
+  const location = useLocation();
   const navigate = useNavigate();
+  
+  const from = location.state?.from?.pathname || "/";
 
   const onSubmit = (data) => {
     createUser(data.email, data.password).then(() => {
@@ -39,7 +42,7 @@ const SignUp = () => {
                   showConfirmButton: false,
                   timer: 1500,
                 });
-                navigate("/");
+                navigate(from, { replace: true });
               }
             });
         })
