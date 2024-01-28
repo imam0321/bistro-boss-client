@@ -50,7 +50,7 @@ const MyCart = () => {
       <div className="uppercase flex justify-between items-center mb-5">
         <h1 className="text-2xl">Total item: {cart.length}</h1>
         <h1 className="text-2xl">Total Price: ${total}</h1>
-        <NavLink className="btn bg-[#D1A054] btn-sm text-white">PAY</NavLink>
+        <NavLink to='/dashboard/payment' className="btn bg-[#D1A054] btn-sm text-white">PAY</NavLink>
       </div>
       <div className="overflow-x-auto">
         <table className="table">
