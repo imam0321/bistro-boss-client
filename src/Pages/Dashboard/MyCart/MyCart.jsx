@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 
 const MyCart = () => {
   const [cart, refetch] = useCart();
-  const total = cart.reduce((sum, item) => Math.round(item.price + sum), 0);
+  const total = cart.reduce((sum, item) => parseFloat(item.price + sum).toFixed(2), 0);
 
   const handleDelete = (item) => {
     Swal.fire({
