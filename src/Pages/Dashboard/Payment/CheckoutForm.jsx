@@ -2,6 +2,7 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useEffect, useState } from "react";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import useAuth from "../../../Hooks/useAuth";
+import "./CheckoutForm.css";
 
 const CheckoutForm = ({ cart, price }) => {
   const stripe = useStripe();
@@ -14,9 +15,11 @@ const CheckoutForm = ({ cart, price }) => {
   const [transactionId, setTransactionId] = useState("");
 
   useEffect(() => {
-    axiosSecure.post("/create-payment-intent", { price }).then((res) => {
-      setClientSecret(res.data.clientSecret);
-    });
+    if (price > 0) {
+      axiosSecure.post("/create-payment-intent", { price }).then((res) => {
+        setClientSecret(res.data.clientSecret);
+      });
+    }
   }, [price, axiosSecure]);
 
   const handleSubmit = async (event) => {
@@ -63,18 +66,20 @@ const CheckoutForm = ({ cart, price }) => {
       setTransactionId(paymentIntent.id);
       const payment = {
         email: user?.email,
-        transactionId :transactionId.id,
+        transactionId: transactionId.id,
         price,
+        date: new Date(),
         quantity: cart.length,
-        items: cart.map(item => item._id),
-        itemNames: cart.map(item => item.name)
-      }
-      axiosSecure.post('/payments', payment)
-      .then(res => {
-        if(res.data.insertedId){
+        cartItems: cart.map((item) => item._id),
+        menuItems: cart.map((item) => item.menuItemId),
+        orderStatus: "Service pending",
+        itemNames: cart.map((item) => item.name),
+      };
+      axiosSecure.post("/payments", payment).then((res) => {
+        if (res.data.insertResult.insertedId) {
           //sweet alert
         }
-      })
+      });
     }
   };
   return (
@@ -99,7 +104,7 @@ const CheckoutForm = ({ cart, price }) => {
 
         <button
           type="submit"
-          className="btn btn-neutral btn-sm mt-4"
+          className="btn btn-neutral btn-sm"
           disabled={!stripe || !clientSecret || processing}
         >
           Pay
