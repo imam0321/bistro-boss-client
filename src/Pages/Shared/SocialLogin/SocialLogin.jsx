@@ -4,46 +4,51 @@ import useAuth from "../../../Hooks/useAuth";
 import Swal from "sweetalert2";
 
 const SocialLogin = () => {
-  const {googleSignIn} = useAuth();
+  const { googleSignIn } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
 
   const handleGoogleSignIn = () => {
-    googleSignIn()
-    .then((result)=> {
-      const loggedInUser = result.user
-      const saveUser = {name: loggedInUser.displayName, email: loggedInUser.email}
-          fetch("http://localhost:5000/users",{
-            method: 'POST',
-            headers: {
-              'content-type': 'application/json'
-            },
-            body: JSON.stringify(saveUser)
-          })
-            .then((res) => res.json())
-            .then(() => {
-              Swal.fire({
-                title: "User Login Successful.",
-                showClass: {
-                  popup: `
+    googleSignIn().then((result) => {
+      const loggedInUser = result.user;
+      const saveUser = {
+        name: loggedInUser.displayName,
+        email: loggedInUser.email,
+      };
+      fetch(
+        "https://bistro-boss-server-imam-hossains-projects.vercel.app/users",
+        {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(saveUser),
+        }
+      )
+        .then((res) => res.json())
+        .then(() => {
+          Swal.fire({
+            title: "User Login Successful.",
+            showClass: {
+              popup: `
                     animate__animated
                     animate__fadeInUp
                     animate__faster
                   `,
-                },
-                hideClass: {
-                  popup: `
+            },
+            hideClass: {
+              popup: `
                     animate__animated
                     animate__fadeOutDown
                     animate__faster
                   `,
-                },
-              });
-              navigate(from, { replace: true });
-            });
-    })
-  }
+            },
+          });
+          navigate(from, { replace: true });
+        });
+    });
+  };
 
   return (
     <div className="mx-auto">
@@ -52,7 +57,10 @@ const SocialLogin = () => {
         <button className="btn btn-outline btn-circle btn-sm">
           <FaFacebookF />
         </button>
-        <button onClick={handleGoogleSignIn} className="btn btn-outline btn-circle btn-sm">
+        <button
+          onClick={handleGoogleSignIn}
+          className="btn btn-outline btn-circle btn-sm"
+        >
           <FaGoogle />
         </button>
         <button className="btn btn-outline btn-circle btn-sm">

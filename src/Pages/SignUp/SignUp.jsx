@@ -4,7 +4,7 @@ import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
 import SocialLogin from "../Shared/SocialLogin/SocialLogin";
 import useAuth from "../../Hooks/useAuth";
-import signUpImg from '../../assets/others/Illustration.svg'
+import signUpImg from "../../assets/others/Illustration.svg";
 
 const SignUp = () => {
   const {
@@ -16,21 +16,24 @@ const SignUp = () => {
   const { createUser, updateUserProfile } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
-  
+
   const from = location.state?.from?.pathname || "/";
 
   const onSubmit = (data) => {
     createUser(data.email, data.password).then(() => {
       updateUserProfile(data.name, data.photoURL)
         .then(() => {
-          const saveUser = {name: data.name, email: data.email}
-          fetch("http://localhost:5000/users",{
-            method: 'POST',
-            headers: {
-              'content-type': 'application/json'
-            },
-            body: JSON.stringify(saveUser)
-          })
+          const saveUser = { name: data.name, email: data.email };
+          fetch(
+            "https://bistro-boss-server-imam-hossains-projects.vercel.app/users",
+            {
+              method: "POST",
+              headers: {
+                "content-type": "application/json",
+              },
+              body: JSON.stringify(saveUser),
+            }
+          )
             .then((res) => res.json())
             .then((data) => {
               if (data.insertedId) {

@@ -36,9 +36,9 @@ const Dashboard = () => {
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
-        <ul className="menu p-4 w-80 bg-[#D1A054]">
-          <h1 className="text-3xl font-semibold">BISTRO BOSS</h1>
-          <h5 className="text-sm font-semibold mb-4">Restaurant</h5>
+        <ul className="menu p-4 w-72 bg-[#D1A054]">
+          <h1 className="text-3xl font-semibold mt-6">BISTRO BOSS</h1>
+          <h5 className="text-md font-semibold ms-1 mb-6 tracking-[.75em]">Restaurant</h5>
           {isAdmin ? 
             <>
               <li>
@@ -57,8 +57,8 @@ const Dashboard = () => {
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/dashboard/history">
-                  <FaWallet /> MANAGE BOOKINGS
+                <NavLink to="/">
+                  <FaWallet /> MANAGE BOOKINGS (Not Implemented)
                 </NavLink>
               </li>
               <li>
@@ -72,17 +72,17 @@ const Dashboard = () => {
             <>
               <li>
                 <NavLink to="/dashboard/userHome">
-                  <FaHouse /> User Home
+                  <FaHouse /> User Home (Not Implemented)
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/dashboard/reservation">
-                  <FaCalendarDays /> Reservation
+                <NavLink to="/">
+                  <FaCalendarDays /> Reservation (Not Implemented)
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/dashboard/history">
-                  <FaWallet /> Payment History
+                <NavLink to="/">
+                  <FaWallet /> Payment History (Not Implemented)
                 </NavLink>
               </li>
               <li>
@@ -109,13 +109,13 @@ const Dashboard = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/">
-              <FaBagShopping /> SHOP
+            <NavLink to="/order/salad">
+              <FaBagShopping /> Order Food
             </NavLink>
           </li>
           <li>
             <NavLink to="/">
-              <FaEnvelope /> CONTACT
+              <FaEnvelope /> CONTACT (Not Implemented)
             </NavLink>
           </li>
         </ul>

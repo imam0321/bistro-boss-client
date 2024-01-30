@@ -7,8 +7,8 @@ import Swal from "sweetalert2";
 
 const MyCart = () => {
   const [cart, refetch] = useCart();
-  const total = cart.reduce((sum, item) => item.price + sum , 0);
-  const price = parseFloat(total.toFixed(2))
+  const total = cart.reduce((sum, item) => item.price + sum, 0);
+  const price = parseFloat(total.toFixed(2));
 
   const handleDelete = (item) => {
     Swal.fire({
@@ -19,12 +19,14 @@ const MyCart = () => {
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes, delete it!",
-    })
-    .then((result) => {
+    }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/carts/${item._id}`, {
-          method: "DELETE",
-        })
+        fetch(
+          `https://bistro-boss-server-imam-hossains-projects.vercel.app/carts/${item._id}`,
+          {
+            method: "DELETE",
+          }
+        )
           .then((res) => res.json())
           .then((data) => {
             if (data.deletedCount > 0) {
@@ -44,14 +46,16 @@ const MyCart = () => {
       <Helmet>
         <title>Bistro | My Cart</title>
       </Helmet>
-      <SectionTitle
-        subHeading="My Cart"
-        heading="ADD MORE?"
-      ></SectionTitle>
+      <SectionTitle subHeading="My Cart" heading="ADD MORE?"></SectionTitle>
       <div className="uppercase flex justify-between items-center mb-5">
         <h1 className="text-2xl">Total item: {cart.length}</h1>
         <h1 className="text-2xl">Total Price: ${price}</h1>
-        <NavLink to='/dashboard/payment' className="btn bg-[#D1A054] btn-sm text-white">PAY</NavLink>
+        <NavLink
+          to="/dashboard/payment"
+          className="btn bg-[#D1A054] btn-sm text-white"
+        >
+          PAY
+        </NavLink>
       </div>
       <div className="overflow-x-auto">
         <table className="table">

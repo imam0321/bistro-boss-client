@@ -7,7 +7,7 @@ import useAdmin from "../../../Hooks/useAdmin";
 const NavBar = () => {
   const { user, logOut } = useAuth();
   const [cart] = useCart();
-  const [isLoading] = useAdmin();
+  const [isAdmin] = useAdmin();
 
   const handleLogOut = () => {
     logOut()
@@ -27,15 +27,21 @@ const NavBar = () => {
         <Link to="/order/salad">Order Food</Link>
       </li>
       <li>
-        <Link to={isLoading ? '/dashboard/adminHome' : '/dashboard/userHome' }>Dashboard</Link>
-      </li>
-      
-      <li>
-        <Link to='/dashboard'>
-          <FaCartShopping  className="text-2xl"/>
-            <div className="badge badge-secondary">+{cart?.length || 0}</div>
+        <Link to={isAdmin ? "/dashboard/adminHome" : "/dashboard/userHome"}>
+          Dashboard
         </Link>
       </li>
+
+      {!isAdmin ? (
+        <li>
+          <Link to={isAdmin ? "/dashboard/adminHome" : "/dashboard/myCart"}>
+            <FaCartShopping className="text-2xl" />
+            <div className="badge badge-secondary">+{cart?.length || 0}</div>
+          </Link>
+        </li>
+      ) : (
+        ""
+      )}
       {user ? (
         <Link className="mt-2" onClick={handleLogOut}>
           LogOut

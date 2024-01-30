@@ -5,39 +5,40 @@ import { FaTrashCan, FaUsers } from "react-icons/fa6";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
-
 const AllUsers = () => {
   const [axiosSecure] = useAxiosSecure();
-  const {data: users = [], refetch} = useQuery( {
-    queryKey: ['users'], 
-    queryFn: async() => {
-      const res = await axiosSecure.get('/users')
+  const { data: users = [], refetch } = useQuery({
+    queryKey: ["users"],
+    queryFn: async () => {
+      const res = await axiosSecure.get("/users");
       return res.data;
-    }
-  })
+    },
+  });
   const handleMakeAdmin = (user) => {
-    fetch(`http://localhost:5000/users/admin/${user._id}`, {
-      method: 'PATCH'
-    })
-    .then(res => res.json())
-    .then(data => {
-      if(data.modifiedCount){
-        refetch();
-        Swal.fire({
-          position: "top-end",
-          icon: "success",
-          title: `${user.name} is an admin naw`,
-          showConfirmButton: false,
-          timer: 1500
-        });
+    fetch(
+      `https://bistro-boss-server-imam-hossains-projects.vercel.app/users/admin/${user._id}`,
+      {
+        method: "PATCH",
       }
-    })
-
-  }
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.modifiedCount) {
+          refetch();
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: `${user.name} is an admin naw`,
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+      });
+  };
 
   const handleDelete = (user) => {
-    // TODO: delete users 
-  }
+    // TODO: delete users
+  };
   return (
     <div>
       <Helmet>
@@ -68,15 +69,16 @@ const AllUsers = () => {
                 <td>{user.name}</td>
                 <td>{user.email}</td>
                 <td className="text-end">
-                {
-                  user.role === 'admin' ? 'admin' : 
-                  <button
-                    onClick={() => handleMakeAdmin(user)}
-                    className="btn bg-[#D1A054] text-white hover:bg-[#D1A054]"
-                  >
-                    <FaUsers />
-                  </button>
-                }
+                  {user.role === "admin" ? (
+                    "admin"
+                  ) : (
+                    <button
+                      onClick={() => handleMakeAdmin(user)}
+                      className="btn bg-[#D1A054] text-white hover:bg-[#D1A054]"
+                    >
+                      <FaUsers />
+                    </button>
+                  )}
                 </td>
                 <td>
                   <button
