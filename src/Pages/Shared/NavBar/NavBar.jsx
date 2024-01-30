@@ -2,10 +2,12 @@ import { Link } from "react-router-dom";
 import { FaCartShopping } from "react-icons/fa6";
 import useCart from "../../../Hooks/useCart";
 import useAuth from "../../../Hooks/useAuth";
+import useAdmin from "../../../Hooks/useAdmin";
 
 const NavBar = () => {
   const { user, logOut } = useAuth();
   const [cart] = useCart();
+  const [isLoading] = useAdmin();
 
   const handleLogOut = () => {
     logOut()
@@ -24,6 +26,10 @@ const NavBar = () => {
       <li>
         <Link to="/order/salad">Order Food</Link>
       </li>
+      <li>
+        <Link to={isLoading ? '/dashboard/adminHome' : '/dashboard/userHome' }>Dashboard</Link>
+      </li>
+      
       <li>
         <Link to='/dashboard'>
           <FaCartShopping  className="text-2xl"/>

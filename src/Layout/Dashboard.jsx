@@ -38,11 +38,11 @@ const Dashboard = () => {
         ></label>
         <ul className="menu p-4 w-80 bg-[#D1A054]">
           <h1 className="text-3xl font-semibold">BISTRO BOSS</h1>
-          <h5 className="text-sm font-semibold">Restaurant</h5>
+          <h5 className="text-sm font-semibold mb-4">Restaurant</h5>
           {isAdmin ? 
             <>
               <li>
-                <NavLink to="/">
+                <NavLink to="/dashboard/adminHome">
                   <FaHouse /> ADMIN HOME
                 </NavLink>
               </li>
@@ -71,7 +71,7 @@ const Dashboard = () => {
            : 
             <>
               <li>
-                <NavLink to="/">
+                <NavLink to="/dashboard/userHome">
                   <FaHouse /> User Home
                 </NavLink>
               </li>

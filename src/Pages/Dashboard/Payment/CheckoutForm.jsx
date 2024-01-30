@@ -104,7 +104,7 @@ const CheckoutForm = ({ cart, price }) => {
 
         <button
           type="submit"
-          className="btn btn-neutral btn-sm"
+          className="btn btn-neutral btn-wide mt-10 mx-32"
           disabled={!stripe || !clientSecret || processing}
         >
           Pay
