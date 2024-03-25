@@ -5,7 +5,7 @@ import {
   validateCaptcha,
 } from "react-simple-captcha";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import loginImg from '../../assets/others/Illustration.svg'
+import loginImg from '../../assets/others/authentication2.png'
 
 import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
@@ -69,7 +69,7 @@ const Login = () => {
       </Helmet>
       <div className="hero min-h-screen bg-base-200">
         <div className="hero-content flex-col lg:flex-row">
-          <div className="text-center md:w-1/2 mr-12">
+          <div className="text-center mr-12">
             <h1 className="text-5xl font-bold text-center py-5">Login now!</h1>
             <img src={loginImg} alt="" />
           </div>

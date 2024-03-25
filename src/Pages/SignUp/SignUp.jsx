@@ -4,7 +4,7 @@ import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
 import SocialLogin from "../Shared/SocialLogin/SocialLogin";
 import useAuth from "../../Hooks/useAuth";
-import signUpImg from "../../assets/others/Illustration.svg";
+import signUpImg from "../../assets/others/authentication1.png";
 
 const SignUp = () => {
   const {
