@@ -26,13 +26,17 @@ const NavBar = () => {
       <li>
         <Link to="/order/salad">Order Food</Link>
       </li>
-      <li>
+      {
+        user ? 
+        <li>
         <Link to={isAdmin ? "/dashboard/adminHome" : "/dashboard/userHome"}>
           Dashboard
         </Link>
       </li>
+      : ''
+      }
 
-      {!isAdmin ? (
+      {user && !isAdmin ? (
         <li>
           <Link to={isAdmin ? "/dashboard/adminHome" : "/dashboard/myCart"}>
             <FaCartShopping className="text-2xl" />

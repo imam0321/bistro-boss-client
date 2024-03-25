@@ -2,11 +2,9 @@ import { NavLink, Outlet } from "react-router-dom";
 import {
   FaCartShopping,
   FaWallet,
-  FaCalendarDays,
   FaHouse,
   FaBars,
   FaBagShopping,
-  FaEnvelope,
   FaUtensils,
   FaUsers,
   FaBarsStaggered,
@@ -56,11 +54,11 @@ const Dashboard = () => {
                   <FaBarsStaggered /> MANAGE ITEMS
                 </NavLink>
               </li>
-              <li>
+              {/* TODO: <li>
                 <NavLink to="/">
                   <FaWallet /> MANAGE BOOKINGS (Not Implemented)
                 </NavLink>
-              </li>
+              </li> */}
               <li>
                 <NavLink to="/dashboard/allUsers">
                   <FaUsers /> All USERS
@@ -75,13 +73,13 @@ const Dashboard = () => {
                   <FaHouse /> User Home (Not Implemented)
                 </NavLink>
               </li>
-              <li>
+              {/* TODO <li>
                 <NavLink to="/">
                   <FaCalendarDays /> Reservation (Not Implemented)
                 </NavLink>
-              </li>
+              </li> */}
               <li>
-                <NavLink to="/">
+                <NavLink to="/dashboard/paymentHistory">
                   <FaWallet /> Payment History (Not Implemented)
                 </NavLink>
               </li>
@@ -93,11 +91,10 @@ const Dashboard = () => {
                   </div>
                 </NavLink>
               </li>
+              
             </>
           }
-
           <div className="divider"></div>
-
           <li>
             <NavLink to="/">
               <FaHouse /> HOME
@@ -113,11 +110,11 @@ const Dashboard = () => {
               <FaBagShopping /> Order Food
             </NavLink>
           </li>
-          <li>
+          {/* TODO: <li>
             <NavLink to="/">
               <FaEnvelope /> CONTACT (Not Implemented)
             </NavLink>
-          </li>
+          </li> */}
         </ul>
       </div>
     </div>

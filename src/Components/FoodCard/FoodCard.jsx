@@ -19,16 +19,13 @@ const FoodCard = ({ item }) => {
         price,
         email: user.email,
       };
-      fetch(
-        "https://bistro-boss-server-imam-hossains-projects.vercel.app/carts",
-        {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify(cartItem),
-        }
-      )
+      fetch("http://localhost:5000/carts", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(cartItem),
+      })
         .then((res) => res.json())
         .then((data) => {
           if (data.insertedId) {

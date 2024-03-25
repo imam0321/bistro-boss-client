@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import axios from "axios";
 
 const axiosSecure = axios.create({
-  baseURL: "https://bistro-boss-server-imam-hossains-projects.vercel.app",
+  baseURL: "http://localhost:5000",
 });
 
 const useAxiosSecure = () => {
