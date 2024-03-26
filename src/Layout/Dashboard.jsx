@@ -70,7 +70,7 @@ const Dashboard = () => {
             <>
               <li>
                 <NavLink to="/dashboard/userHome">
-                  <FaHouse /> User Home (Not Implemented)
+                  <FaHouse /> User Home
                 </NavLink>
               </li>
               {/* TODO <li>
